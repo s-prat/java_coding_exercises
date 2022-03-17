@@ -30,12 +30,6 @@ public class Exercise001Test {
     }
 
     @Test
-    public void testBlankCapitalizeWord() {
-        assertEquals("", ex001.capitalizeWord("   "));
-
-    }
-
-    @Test
     public void testNullCapitalizeWord() {
         assertEquals(null, ex001.capitalizeWord(null));
     }
@@ -118,14 +112,22 @@ public class Exercise001Test {
 
     @Test
     public void checkSentenceReverse() {
-        Exercise001 ex001 = new Exercise001();
         assertEquals("oof", ex001.reverse("foo"));
         assertEquals("?siht od ot tnaw neve uoy dluow yhw", ex001.reverse("why would you even want to do this?"));
     }
 
     @Test
+    public void testReverseWhenSentenceIsNull() {
+        assertEquals("", ex001.reverse(null));
+    }
+
+    @Test
+    public void testReverseWhenSentenceIsEmpty() {
+        assertEquals("", ex001.reverse(""));
+    }
+
+    @Test
     public void checkLinuxUsers() {
-        Exercise001 ex001 = new Exercise001();
         User u1 = new User("Heather", "Windows 10", "Windows");
         User u2 = new User("Paul", "Windows 95", "Windows");
         User u3 = new User("Sheila", "CentOS 7", "Linux");
@@ -143,5 +145,10 @@ public class Exercise001Test {
         users.add(u3);
         users.add(u4);
         assertEquals(2, ex001.countLinuxUsers(users));
+    }
+
+    @Test
+    public void testLinuxUsersWhenNull() {
+        assertEquals(0, ex001.countLinuxUsers(null));
     }
 }
