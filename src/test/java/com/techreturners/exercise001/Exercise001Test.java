@@ -5,16 +5,49 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class Exercise001Test {
 
+    private Exercise001 ex001;
+
+    @Before
+    public void setUp() {
+        ex001 = new Exercise001();
+    }
+
     @Test
     public void checkHello() {
-        Exercise001 ex001 = new Exercise001();
         assertEquals("Hello", ex001.capitalizeWord("hello"));
         assertEquals("The quick fox", ex001.capitalizeWord("the quick fox"));
         assertEquals("Oh no, bears!!!", ex001.capitalizeWord("oh no, bears!!!"));
+    }
+
+    @Test
+    public void testEmptyCapitalizeWord() {
+        assertEquals("", ex001.capitalizeWord(""));
+    }
+
+    @Test
+    public void testBlankCapitalizeWord() {
+        assertEquals("", ex001.capitalizeWord("   "));
+
+    }
+
+    @Test
+    public void testNullCapitalizeWord() {
+        assertEquals(null, ex001.capitalizeWord(null));
+    }
+
+    @Test
+    public void testSingleCharCapitalizeWord() {
+        assertEquals("H", ex001.capitalizeWord("h"));
+    }
+
+    @Test
+    public void testTwoCharCapitalizeWord() {
+        assertEquals("He", ex001.capitalizeWord("he"));
     }
 
     @Test
@@ -25,19 +58,62 @@ public class Exercise001Test {
 
     @Test
     public void checkInitials() {
-        Exercise001 ex001 = new Exercise001();
         assertEquals("F.B", ex001.generateInitials("Frederic", "Bonneville"));
         assertEquals("K.M", ex001.generateInitials("Karl", "Marx"));
         assertEquals("L.H", ex001.generateInitials("Lewis", "Hamilton"));
     }
 
     @Test
+    public void testFNameNullCheckInitials() {
+        assertEquals("B", ex001.generateInitials(null, "Bonneville"));
+    }
+
+    @Test
+    public void testLNameNullCheckInitials() {
+        assertEquals("F", ex001.generateInitials("Frederic", null));
+    }
+
+    @Test
+    public void testFNameEmptyCheckInitials() {
+        assertEquals("B", ex001.generateInitials("", "Bonneville"));
+    }
+
+    @Test
+    public void testLNameEmptyCheckInitials() {
+        assertEquals("F", ex001.generateInitials("Frederic", ""));
+    }
+
+    @Test
+    public void testBothNullCheckInitials() {
+        assertEquals(null, ex001.generateInitials(null, null));
+    }
+
+    @Test
+    public void testBothEmptyCheckInitials() {
+        assertEquals("", ex001.generateInitials("", ""));
+    }
+
+    @Test
     public void checkAddVat() {
-        Exercise001 ex001 = new Exercise001();
         assertEquals(120, ex001.addVat(100, 20), 0.0);
         assertEquals(47, ex001.addVat(40, 17.5), 0.0);
         assertEquals(39.36, ex001.addVat(33.5, 17.5), 0.0);
         assertEquals(25, ex001.addVat(25, 0), 0.0);
+    }
+
+    @Test
+    public void testAddVatIfOPZero() {
+        assertEquals(0, ex001.addVat(0, 20), 0.0);
+    }
+
+    @Test
+    public void testAddVatIfVRZero() {
+        assertEquals(100, ex001.addVat(100, 0), 0.0);
+    }
+
+    @Test
+    public void testAddVatIfBothZero() {
+        assertEquals(0, ex001.addVat(0, 0), 0.0);
     }
 
     @Test
